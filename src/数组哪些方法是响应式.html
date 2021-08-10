@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="(item,index) in items" :key="index">{{item}}</li>
+			</ul>
+			<button @click="shift">shift删除头部</button>
+			<button @click="unshift">unshift头部插入</button>
+			<button @click="pop">pop删除尾部</button>
+			<button @click="splice1">splice删除元素</button>
+			<button @click="splice2">splice插入元素</button>
+			<button @click="splice3">splice插入多个元素</button>
+			<button @click="sort">sort排序</button>
+			<button @click="reverse">reverse倒叙</button>
+			<button @click="change">更新数据</button>
+		</div>
+		<script src="vue.js" type="text/javascript"></script>
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					moves:['海王','钢铁侠1','钢铁侠2','神奇女侠'],
+					items:['02','39','14','1'],
+				},
+				methods:{
+					shift(){
+						// this.items.shift();
+						console.log(this.items.shift());
+					},
+					unshift(){
+						// this.items.shift();
+						console.log(this.items.unshift('致命黑兰'));
+					},
+					pop(){
+						// this.items.shift();
+						console.log(this.items.pop());
+					},
+					splice1(){
+						// this.items.shift();
+						console.log(this.items.splice(2,1));
+					},
+					splice2(){
+						// this.items.shift();
+						console.log(this.items.splice(2,0,'黑寡妇'));
+					},
+					splice3(){
+						// this.items.shift();
+						console.log(this.items.splice(2,0,'黑寡妇','致命黑兰','明天会好的'));
+					},
+					sort(){
+						// this.items.shift();
+						console.log(this.items.sort(function(a,b){ 
+									// if(a>=b) {
+									// 	return b-a
+									// }else{
+										return a-b
+									// }
+								}
+							));
+					},
+					reverse(){
+						// this.items.shift();
+						console.log(this.items.reverse());
+					},
+					change(){
+						// console.log(this.items[0]='1111111');
+						Vue.set(this.items,0,'111111111111');
+					}
+				},
+			});
+		</script>
+	</body>
+</html>

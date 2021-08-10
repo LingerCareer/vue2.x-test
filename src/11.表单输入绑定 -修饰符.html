@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单输入绑定</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+
+		<div id="app" >
+			
+		</div>
+		<template id="mynpc">
+			<ol>
+				<li>
+					<h1>lazy 在“change”时而非“input”时更新</h1>
+					<input v-model.lazy="msg">
+					msg：{{msg}}</br>
+					<input type="radio" value="124" v-model.lazy="pick">
+					pick：{{pick}}</br>
+					<input type="checkbox" v-model.lazy="toggle">
+					toggle：{{toggle}}</br>
+					<select v-model.lazy="selected">
+						<!-- 内联对象字面量 -->
+					  <option :value="{ number: 123,name:'小子' }">1</option>
+					  <option :value="{ number: 456,name:'闺女'  }">2</option>
+					  <option :value="{ number: 789,name:'儿媳'  }">3</option>
+					</select>
+					selected：{{selected}}
+				</li>
+				<li>
+					<h1>number </h1>
+					<input v-model.number="num" type="number">
+					num:{{num}}
+				</li>
+				<li>
+					<h1>trim </h1>
+					<input v-model.trim="msg1" >
+					msg1:{{msg1}}
+				</li>
+			</ol>
+		</template>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				template:'#mynpc',
+				data(){
+					return{
+						msg:'',
+						toggle:'',
+						// a:'12',
+						pick:'',
+						selected:'',
+						num:'',
+						msg1:''
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

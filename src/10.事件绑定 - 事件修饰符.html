@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法-$watch</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<style>
+			.u_box{
+				width:200px;
+				height: 200px;
+				background: #FF976A;
+			}
+			.u_box_blue{
+				width:100px;
+				height: 100px;
+				background: #168DE9;
+			}
+		</style>
+	</head>
+	<body>
+1、stop，冒泡就是一层一层触发外层绑定的事件。</br>
+2、prevent，阻止默认事件。</br>
+3、capture， 添加事件监听器时使用事件捕获模式，即内部元素触发的事件先在此处理，然后才交由内部元素进行处理。先执行有capture的事件</br>
+4、self，只当在 event.target 是当前元素自身时触发处理函数，即事件不是从内部元素触发的。</br>
+5、{keycode|keyAlias}指定键盘或者是鼠标按键时。</br>
+6、once，无论什么情况，都只执行一次。</br>
+1、stop，冒泡就是一层一层触发外层绑定的事件。</br>
+		<div id="app" >
+			
+		</div>
+		<template id="mynpc">
+			<ol>
+				<li>
+					<h1>stop 阻止冒泡</h1>
+					<div class="u_box" @click="alert('我是红色块,我没有stop')">
+						<div class="u_box_blue" @click.stop="alert('我是蓝色块,我有stop')">
+							<button  @click="alert('我是按钮,我没有stop')">
+								我是按钮
+							</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<h1>prevent 阻止默认行为</h1>
+					<div class="u_box" @click="alert('我是红色块,我没有prevent')">
+						<div class="u_box_blue" @click.prevent="alert('我是蓝色块,我有prevent')">
+							<a href="01.第一个.html"  @click.prevent="alert('我是a标签,我有prevent,阻止了herf跳转')">
+								我是a标签
+							</a>
+						</div>
+					</div>
+					<form v-on:submit.prevent="warn('submit绑在form上')">
+						<button type="submit"> 提交事件不再重载页面 </button>
+					</form>
+					<form v-on:submit="warn('submit绑在form上')">
+						<button type="submit">默认提交事件会重载页面</button>
+					</form>
+				</li>
+				<li>
+					<h1>capture，谁有谁先执行</h1>
+					<div class="u_box" @click.capture="alert('我是红色块,我没有capture')">
+						<div class="u_box_blue" @click.capture="alert('我是蓝色块,我有capture')">
+							<button  @click="alert('我是按钮,我没有capture')">
+								我是按钮
+							</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<h1>self 只有自身触发时才执行</h1>
+					<div class="u_box" @click.self="alert('我是红色块,我有self')">
+						<div class="u_box_blue" @click="alert('我是蓝色块,我没有self')">
+							<button  @click.self="alert('我是按钮,我有self')">
+								我是按钮
+							</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<h1>once - 只执行一次</h1>
+					<div class="u_box" @click.once="alert('我是红色块,我有once')">
+						<div class="u_box_blue" @click="alert('我是蓝色块,我没有once')">
+							<button  @click.once="alert('我是按钮,我有once')">
+								我是按钮
+							</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<h1>{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。</h1>
+					<div class="u_box" @keyup.enter="alert('我是红色块,我有keycode')">
+						<div class="u_box_blue" @keyup.page-down="alert('我是蓝色块,我有keyCode')">
+							<button @keyup.page-down="alert('我是按钮,我有keycode')">
+								我是按钮.13
+							</button>
+						</div>
+						<br>
+						click与ctrl组合可用
+						<div class="u_box_blue" @click.ctrl="alert('我是蓝色块,我有keyCode')">
+						</div>
+					</div>
+					<button @click.right="alert('我是按钮,我有right')">
+						我是鼠标左键
+					</button>
+					.exact 修饰符允许你控制由精确的系统修饰符组合触发的事件。
+					<!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
+					<button v-on:click.ctrl="alert('click+ctrl+...')">A</button>
+					
+					<!-- 有且只有 Ctrl 被按下的时候才触发 -->
+					<button v-on:click.ctrl.exact="alert('click+ctrl')">A</button>
+					
+					<!-- 没有任何系统修饰符被按下的时候才触发 -->
+					<button v-on:click.exact="alert('没有任何修饰符时被触发')">A</button>
+				</li>
+			</ol>
+		</template>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				template:'#mynpc',
+				data(){
+				},
+				methods:{
+					warn(a,event){
+						alert(a);
+						
+						console.log(event);
+						 // 现在我们可以访问原生事件对象
+						// if (event) {
+						//   event.preventDefault()
+						// }
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法-$watch</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+		如果需要响应式的，需要在new Vue的时候提前声明变量。</br>
+		Object.freeze在new Vue声明前先执行</br>
+		vm.$watch放在值改变之前</br>
+		不要在选项 property 或回调上使用箭头函数，比如 created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod())。因为箭头函数并没有 this，this 会作为变量一直向上级词法作用域查找，直至找到为止，经常导致 Uncaught TypeError: Cannot read property of undefined 或 Uncaught TypeError: this.myMethod is not a function 之类的错误。</br>
+		一共11个周期函数，前10个成对，最后一个是子组件错误的函数errorCaptured</br>
+		<div id="app" >
+			<div>我没绑‘v-once’：{{a}}</div>
+			<div v-once>我绑定了‘v-once’：{{b}}</div>
+		</div>
+		<script type="text/javascript">
+			// var data = {a:1};
+			// Object.freeze(data);
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					a:1,
+					b:1
+				},
+			})
+			vm.$watch('a',function(newVal,oldVal){
+				console.log('a',newVal,oldVal);
+			})
+			setTimeout(function(){
+				vm.$data.a='我要改值'
+				vm.$data.b='我要改值'
+			},2000);
+		</script>
+	</body>
+</html>

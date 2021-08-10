@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单输入绑定</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+
+		<div id="app" >
+			
+		</div>
+		<template id="mynpc">
+			<ol>
+				<li>
+					<h1>值绑定，复选框</h1>
+					<input
+					  type="checkbox"
+					  v-model="toggle"
+					  true-value="yes"
+					  false-value="no"
+					>
+					toggle：{{toggle}}
+				</li>
+				<li>
+					<h1>值绑定，单选框</h1>
+					<input type="radio" v-model="pick" :value="a" />
+					pick：{{pick}}
+				</li>
+				<li>
+					<h1>值绑定，选择框</h1>
+					<select v-model="selected">
+					    <!-- 内联对象字面量 -->
+					  <option :value="{ number: 123,name:'小子' }">1</option>
+					  <option :value="{ number: 456,name:'闺女'  }">2</option>
+					  <option :value="{ number: 789,name:'儿媳'  }">3</option>
+					</select>
+					selected：{{selected}}
+				</li>
+			</ol>
+		</template>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				template:'#mynpc',
+				data(){
+					return{
+						toggle:'',
+						a:'12',
+						pick:'',
+						selected:''
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

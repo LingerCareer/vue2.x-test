@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单输入绑定</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+
+		<div id="app" >
+			
+		</div>
+		<template id="mynpc">
+			<ol>
+				<li>
+					<h1>input输入框 的绑定</h1>
+					<input type="text" v-model="massage" />
+					<br>
+					massage:{{massage}}
+				</li>
+				<li>
+					<h1>textarea 输入框 的绑定</h1>
+					<textarea type="text" v-model="massage2" ></textarea>
+					<br>
+					massage2:{{massage2}}
+				</li>
+				<li>
+					<h1>select下拉 的绑定</h1>
+					<select v-model="select" >
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select>
+					<br>
+					select:{{select}}
+				</li>
+				<li>
+					<h1>radio 单选框 的绑定</h1>
+					<input type="radio" name="name" id="num1" value="num1" v-model="radio" />
+					<label for="num1">num1</label>
+					<input type="radio" name="name" id="num2" value="num2" v-model="radio" />
+					<label for="num2">num2</label>
+					<br>
+					radio:{{radio}}
+				</li>
+				<li>
+					<h1>checkbox 复选框 的绑定</h1>
+					<input type="checkbox" name="name" id="name1" value="num1" v-model="checkbox" />
+					<label for="name1">name1</label>
+					<input type="checkbox" name="name" id="name2" value="num2" v-model="checkbox" />
+					<label for="name2">name2</label>
+					checkbox:{{checkbox}}
+					<br>
+					<input type="checkbox" name="name" id="name1" value="" v-model="checkbox1" />
+					checkbox1:{{checkbox1}}
+				</li>
+				<li>
+					<h1>select v-for 的绑定</h1>
+					<select v-model="select1">
+						<option v-for="n in number">{{n}}</option>
+					</select>
+					select1：{{select1}}
+				</li>
+				<li>
+					<h1>select 多选 的绑定</h1>
+					<select v-model="select2" multiple>
+						<option v-for="n in number">{{n}}</option>
+					</select>
+					select2：{{select2}}
+				</li>
+				<li>
+					<h1>select value/text 的绑定</h1>
+					<select v-model="select3" >
+						<option v-for="item in items" :value="item.value">{{item.text}}</option>
+					</select>
+					select3：{{select3}}
+				</li>
+				
+				<li>
+					<h1>值绑定，复选框</h1>
+					<input
+					  type="checkbox"
+					  v-model="toggle"
+					  true-value="yes"
+					  false-value="no"
+					>
+					toggle：{{toggle}}
+				</li>
+			</ol>
+		</template>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				template:'#mynpc',
+				data(){
+					return{
+						massage:'hi',
+						massage2:'rain',
+						select:'2',
+						radio:'num1',
+						checkbox:['num1'],//多选，所以是数组，
+						checkbox1:'',
+						number:[1,2,3,4,5],
+						select1:'',
+						select2:[],
+						items:[
+							{
+								value:'A',
+								text:'选项1'
+							},
+							{
+								value:'B',
+								text:'选项2'
+							},
+							{
+								value:'C',
+								text:'选项3'
+							},
+							{
+								value:'D',
+								text:'选项4'
+							}
+						],
+						select3:'',
+						toggle:''
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

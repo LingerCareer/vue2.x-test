@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组件基础</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+		component是vue的实例，vue接收的参数可以全部接收。props是属性
+		这里的thing、clicknow不是data中声明的数据，而是字符串形式。但是location是url，而num会报错。即props无法与data中定义数据关联
+		<div id="components-demo" >
+			<my-data title="thing" :data="location"  data1="date" @totel="clicknow"><h1>我是插入的内容</h1></my-data>
+			<my-data title="thing" :data="location"  data1="date" @totel="clicknow"></my-data>
+		</div>
+		<script type="text/javascript">
+			Vue.component('my-data',{
+				props:['title','data'],//自定义的属性不会在标签上渲染出来。如果像data数据那样应用的话，可以正常显示值。
+				data(){
+					return{
+						location:'北京',
+						num:134,
+						date:'2021-07-23',
+						thing:'出差'
+					}
+				},
+				template:'<div><slot></slot><h1>{{date}}</h1><button @click="addCount" >{{title}}数量{{num}}</button></div>',
+				methods:{
+					addCount(){
+						this.num++;
+						var data = {
+							location:this.location,
+							num:this.num,
+							date:this.date,
+							thing:this.thing
+						}
+						this.$emit('totel',data); //totel 是事件名称，写在vm的框架中，而不是在template中。
+					}
+				}
+			});
+			var vm = new Vue({
+				el:'#components-demo',
+				data(){
+				},
+				methods:{
+					clicknow(data){ //clicknow是方法名称
+						alert(data.date+'，在'+data.location+data.thing+'，身上带了'+data.num+'元钱。');
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

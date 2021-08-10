@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法-$watch</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<style>
+			.active{
+				font-size:20px;color:red
+			}
+			.test{
+				font-size:30px;color:blue
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" >
+			<div v-if="type=='1'">1</div>
+			<div v-else-if="type=='2'">2</div>
+			<div v-else-if="type=='3'">3</div>
+			<div v-else>No 1/2/3</div>
+			<div v-show="show">我是v-show</div>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					type:1,
+					show:true
+				},
+				
+			})
+		</script>
+	</body>
+</html>

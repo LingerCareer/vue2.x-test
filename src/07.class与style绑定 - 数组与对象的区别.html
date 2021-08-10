@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法-$watch</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<style>
+			.active{
+				font-size:20px;color:red
+			}
+			.text-danger{
+				font-size:30px;color:blue
+			}
+		</style>
+	</head>
+	<body>
+		不带引号默认都是data中定义的属性</br>
+		class</br>
+		对象时：对象的各key名字是css中定义的class名，value是true或者false的布尔值。</br>
+		数组时：如果是三目运算符，判断条件是布尔值，结果是class名。如果不是三目运算符，那么就直接是class名字(需要带引号的)。</br>
+		<div id="app" >
+			<div
+			  class="static"
+			  :class="[isActive ? 'active':'',hasError ? 'text-danger':'']"
+			>aaaaaaa</div>
+			<div
+			  class="static"
+			  :class="['active','text-danger']"
+			>aaaaaaa</div>
+			<div
+			  class="static"
+			  :class="{ active: isActive, 'text-danger': hasError }"
+			>aaaaaaa</div>
+			<div 
+			  class="static"
+			  :class="classObject"
+			>aaaaaaa</div>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				data: {
+				  isActive: true,
+				  hasError: false
+				},
+				computed: {
+				  classObject: function () {
+				    return {
+				      active: this.isActive && !this.hasError,
+				      'text-danger': this.hasError && this.hasError.type === 'fatal'
+				    }
+				  }
+				}
+			})
+			// vm.$watch('a',function(newVal,oldVal){
+			// 	console.log('a',newVal,oldVal);
+			// })
+			// setTimeout(function(){
+			// 	vm.type=0
+			// 	// vm.$data.rewhtml='我要改值'
+			// },5000);
+		</script>
+	</body>
+</html>

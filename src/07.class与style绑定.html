@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法-$watch</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<style>
+			.active{
+				font-size:20px;color:red
+			}
+			.test{
+				font-size:30px;color:blue
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" >
+			<div class="test" :class="[isActive ? 'active':'',isGreen ? 'green':'']"
+			style="width: 200px;height: 200px;text-align: center;line-height: 200px;"
+			>hi vue</div>
+			<div :style="{color:color,fontSize:size,background:isRed?'#ff0000':''}">hi vue</div>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					isActive:true,
+					// active:'u_ctt',
+					isGreen:false,
+					color:'#ff0',
+					size:'20px',
+					isRed:true,
+				},
+				
+			})
+			// vm.$watch('a',function(newVal,oldVal){
+			// 	console.log('a',newVal,oldVal);
+			// })
+			// setTimeout(function(){
+			// 	vm.type=0
+			// 	// vm.$data.rewhtml='我要改值'
+			// },5000);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+			<div id="app">
+				<button @click="init()">弹窗</button>
+				<van-button type="danger"  @click="init()">弹窗</van-button>
+			</div>
+	</body>
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<script type="text/javascript" src="js/rem.js"></script>
+	<script type="text/javascript" src="js/vue.min.js"></script>
+	<script type="text/javascript" src="js/vant.min.js"></script>
+	<script>
+		var app = new Vue({
+			el:"#app",
+			data:{
+				massage:"hello Vue !!! I'm coming!"
+			},
+			mounted() {
+	
+			},
+			methods: {
+				init(){
+					vant.Toast.allowMultiple()
+					vant.Dialog.alert({
+						messageAlign:'left',
+						message:'2单份发票最高开票限额不允许超过首次申领增值税发票标准100000元单份发票最高开票限额不允许超过首次申领增值税发票标准100000元单份发票最高开票限额不允许超过首次申领增值税发票标准100000元单份发票最高开票限额不允许超过首次申领增值税发票标准100000元单份发票最高开票限额不允许超过首次申领增值税发票标准100000元单份发票最高开票限额不允许超过首次申领增值税发票标准100000元单份发票最高开票限额不允许超过首次申领增值税发票标准100000元单份发票最高开票限额不允许超过首次申领增值税发票标准100000元单份发票最高开票限额不允许超过首次申领增值税发票标准100000元。',
+						beforeClose:function(){
+							alert('别关我！')
+						}
+					}).then(()=>{
+						
+					});
+					// vant.Dialog.alert({
+					// 	messageAlign:'left',
+					// 	message:'1单份发票最高开票限额不允许超过首次申领增值税发票标准100000元。'
+					// }).then(()=>{
+						
+					// });
+					// vant.Dialog.confirm({
+					//   title: '标题',
+					//   message: '弹窗内容',
+					// })
+					//   .then(() => {
+					//     // on confirm
+					//   })
+					//   .catch(() => {
+					//     // on cancel
+					//   });
+					// vant.Toast('111111111111111111111111111111111111111111111111111111111111111111提示内容');
+					// vant.Toast('222222提示内容');
+					  
+				}
+			}
+		});
+	</script>
+</html>

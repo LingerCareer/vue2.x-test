@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法-$watch</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+		我们想要显示一个数组经过过滤或排序后的版本，而不实际变更或重置原始数据。在这种情况下，可以创建一个计算属性，来返回过滤或排序后的数组。
+		<div id="app" >
+			
+		</div>
+		<template id="mynpc">
+			<div>
+				<div>输出偶数</div>
+				<ul>
+					<li v-for="n in evenNumbers">{{ n }}</li>
+				</ul>
+				</br>
+				</br>
+				</br>
+				</br>
+				</br>
+				<div>年纪在15岁以上</div>
+				<ul>
+					<li v-for="item,index in newItems">{{index}}：{{ item.name}}{{item.age}}</li>
+				</ul>
+			</div>
+		</template>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				template:'#mynpc',
+				data: {
+				  numbers: [0, 1, 2, 3, 4, 5 ],
+				  items:[
+					  {
+						  name:'张三',
+						  age:'13'
+					  },
+					  {
+						  name:'李四',
+						  age:'14'
+					  },
+					  {
+						  name:'王五',
+						  age:'15'
+					  },
+					  {
+						  name:'马六',
+						  age:'16'
+					  },
+					  {
+						  name:'孙七',
+						  age:'17'
+					  },
+					  {
+						  name:'周八',
+						  age:'18'
+					  },
+					  {
+						  name:'吴九',
+						  age:'19'
+					  },
+					  {
+						  name:'郑十',
+						  age:'20'
+					  },
+				  ]
+				},
+				computed: {
+					evenNumbers: function () {
+						return this.numbers.filter(function (number) {
+						  return number % 2 === 0
+						})
+					},
+					newItems:function(){ //年纪在15岁以上
+						return this.items.filter(function(item){
+						  var slt = parseInt(item.age) - parseInt(15)
+						  return  slt >= 0 ? slt : ''
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

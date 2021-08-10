@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法-$watch</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+		syle</br>
+		对象时：对象的各key名字是css中定义的属性名，value是定义的data值。</br>
+		多重值</br>
+		<!-- 数组时：如果是三目运算符，判断条件是布尔值，结果是class名。如果不是三目运算符，那么就直接是class名字。</br> -->
+		<div id="app" >
+			<div
+			  :style="[baseStyles, overridingStyles]"
+			>aaaaaaa</div>
+			<div
+			  :style="{color:color,'font-size':size16,'line-height':lh20}"
+			>aaaaaaa</div>
+			<div :style="styleObject">aaaaaaa</div>
+			<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">aaaaaaa</div>								
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				data: {
+					baseStyles:{
+						color:'red',
+						'font-size':'16px'
+					},
+					overridingStyles:{
+						'line-height':'20px'
+					},
+					color: 'red',
+					size16: '16px',
+					lh20:'20px',
+				},
+				computed: {
+				  styleObject: function () {
+				    return {
+				      color: this.color,
+				      'font-size': this.size16,
+				      'line-height': this.lh20
+				    }
+				  }
+				}
+			})
+		</script>
+	</body>
+</html>

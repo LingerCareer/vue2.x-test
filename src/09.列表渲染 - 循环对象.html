@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法-$watch</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+		p中嵌套h1、p、ul等等标签时，循环对象属性的操作会报错。p不能嵌套同级的标签。标签内不能嵌套相同标签。
+		<div id="app" >
+			
+		</div>
+		<template id="mynpc">
+			<div>
+				<div v-for="(value, name, index) in object">
+				  {{ index }}. {{ name }}: {{ value }}
+				</div>
+
+				<!-- <div> -->
+					<div v-for="(value,key,index) in object">
+						<span>{{index}}</span>
+						<h1>{{key}}</h1>:
+						<span>{{value}}</span>
+					</div>
+					<!-- <p v-for="(value,key,index) of object">
+						<h1>{{index}}</h1>
+						<a>{{key}}</a>
+						<span>{{value}}</span>
+					</p>
+				</div> -->
+
+			</div>
+		</template>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				template:'#mynpc',
+				data(){
+					return{
+						object:{
+							name:'挺大的',
+							msg:'正常'
+						},
+						    // object: {
+						    //   title: 'How to do lists in Vue',
+						    //   author: 'Jane Doe',
+						    //   publishedAt: '2016-04-10'
+						    // }
+					}
+				},
+				
+			})
+		</script>
+	</body>
+</html>

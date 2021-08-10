@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组件基础</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+		component是vue的实例，vue接收的参数可以全部接收。props是属性
+		<div id="app" >
+			<button-counter title="title1:"></button-counter>
+			<button-counter title="title2:">啊啊啊</button-counter>
+		</div>
+		<script type="text/javascript">
+			Vue.component('button-counter',{
+				props:['title'],
+				data:function(){
+					return {
+						count:0,
+						count1:10,
+					}
+				},
+				template:'<div><button @click="count++">{{title}}You clicked me {{count}} times.</button><button @click="count1--">{{title}}You clicked me {{count1}} times.</button></div>'
+			});
+			var vm = new Vue({
+				el:'#app',
+				data(){
+				}
+			})
+		</script>
+	</body>
+</html>

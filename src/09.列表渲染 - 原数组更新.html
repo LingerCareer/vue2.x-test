@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法-$watch</title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+		p中嵌套h1、p、ul等等标签时，循环对象属性的操作会报错。p不能嵌套同级的标签。标签内不能嵌套相同标签。
+		<div id="app" >
+			
+		</div>
+		<template id="mynpc">
+			<div>
+				<div v-for="(item,index) in items">
+					{{item}}
+					<p>{{index+1}}</p>
+					<p>谐音tdd：{{item.name}}</p>
+					<p>谐音zc：{{item.msg}}</p>
+				</div>
+				<button v-if="length == items.length" @click="pushFn">push从最后新增一个</button>
+				<div v-else>
+					<button @click="popFn">pop删除最后一个</button>
+					<button @click="unshiftFn">unshift从最前新增一个</button>
+					<button @click="shiftFn">shift删除第一个</button>
+					<button @click="spliceFn">splice从第二个删除1位</button>
+					<button @click="sortFn">sort排序</button>
+					<button @click="reverseFn">reverse颠倒顺序</button>
+				</div>
+
+			</div>
+		</template>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				template:'#mynpc',
+				data(){
+					return{
+						items:[
+							{
+								name:'挺大的',
+								msg:'正常'
+							},
+							{
+								name:'听得到',
+								msg:'郑州'
+							},{
+								name:'听得懂',
+								msg:'增长'
+							}
+						],
+						length:''
+					}
+				},
+				mounted(){
+					this.length = this.items.length;
+				},
+				methods:{
+					pushFn(){
+						this.items.push({
+							name:'特定的',
+							msg:'这种'
+						})
+					},
+					popFn(){
+						this.items.pop();
+					},
+					shiftFn(){
+						this.items.shift();
+					},
+					unshiftFn(){
+						this.items.unshift({
+							name:'特定的',
+							msg:'这种'
+						});
+					},
+					spliceFn(){
+						this.items.splice(1,1);
+					},
+					sortFn(){
+						this.items.sort(function(a,b){
+							a.name - b.name
+						});
+					},
+					reverseFn(){
+						this.items.reverse();
+					},
+				}
+			})
+		</script>
+	</body>
+</html>
